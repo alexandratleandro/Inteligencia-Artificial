@@ -1,0 +1,119 @@
+﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+public class SearchNode
+{	
+	public object state;
+	public float g;
+	public float f;
+	public Action action;
+	public SearchNode parent;
+	public int depth;
+
+	public SearchNode(object state, float g, Action action=Action.None, SearchNode parent=null)
+	{
+		this.state = state;
+		this.g = g;
+		this.f = g;
+		this.action = action;
+		this.parent = parent;
+		if (parent != null) {
+			this.depth = parent.depth + 1;
+		} else {
+			this.depth = 0;
+		}
+	}
+
+	public SearchNode(object state, float g, float h, Action action=Action.None, SearchNode parent=null)
+	{
+		this.state = state;
+		this.g = g;
+		this.f = g + h;
+		this.action = action;
+		this.parent = parent;
+		if (parent != null) {
+			this.depth = parent.depth + 1;
+		} else {
+			this.depth = 0;
+		}
+	}
+}
+public abstract class SearchAlgorithm : MonoBehaviour {
+
+	public int stepsPerFrame = 10;
+	[HideInInspector]public ISearchProblem problem;
+	public int metodo;
+
+	protected bool running = false;
+	protected bool finished = false;
+	protected bool acabou = false;   
+	protected SearchNode solution = null;   
+
+	void Update () {
+		if (running && !finished) {
+			for (int i = 0; i < stepsPerFrame; i++) {
+				if (!finished) { 
+					if (metodo == 1) {
+						Step(); 
+					}
+
+					else if(metodo==2){
+						StepProfundidade ();  						
+					}
+
+					else if(metodo==3){
+						StepAprofundamentoProgressivo();  
+					}
+					else if(metodo==4){
+						StepSofrega(); 
+					}
+					else if(metodo==5){						
+						StepA(); 
+
+					} 
+				}
+			}
+		}
+	}
+
+	public bool Finished()
+	{
+		return finished;
+	}
+
+	public List<Action> GetActionPath()
+	{
+		if (finished && solution != null) {			
+			return BuildActionPath ();
+		} else {
+			Debug.LogWarning("Solution path can not be determined! Either the algorithm has not finished, or a solution could not be found.");
+			return null;
+		}
+	}
+
+	// This method should be overriden on each specific search algorithm.
+	protected abstract void Step ();
+	protected abstract void StepProfundidade ();
+	protected abstract void StepAprofundamentoProgressivo();
+	protected abstract void StepSofrega();
+	protected abstract void StepA();
+
+	public void StartRunning()  
+	{
+		running = true;
+	} 
+ 
+	private List<Action> BuildActionPath()
+	{
+		List<Action> path = new List<Action> ();
+		SearchNode node = solution;
+
+		while (node.parent != null) {
+			path.Insert (0, node.action);
+			node = node.parent;
+		}
+
+		return path;
+	}
+}

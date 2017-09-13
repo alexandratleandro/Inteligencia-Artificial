@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{5642EB34-0EB6-38B4-15DD-22327B949336}") = "LuzAgress", "Assembly-CSharp.csproj", "{2ED56067-3581-F508-2964-E5EE39315FAB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2ED56067-3581-F508-2964-E5EE39315FAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ED56067-3581-F508-2964-E5EE39315FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ED56067-3581-F508-2964-E5EE39315FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ED56067-3581-F508-2964-E5EE39315FAB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
